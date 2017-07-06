@@ -13,4 +13,4 @@ Even though this may sound ideal, some instructions take longer than others to c
 operations finishing quickly and leaving the system idle.
 
 
-
+## Lab 2 : Multi Cycle Datapath Simulator

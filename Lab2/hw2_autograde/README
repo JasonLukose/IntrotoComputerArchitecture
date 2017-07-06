@@ -1,0 +1,29 @@
+Steps for autograde:
+=====================
+1.  Copy your solution file (lc3bsim2.c) in this directory
+2.  Type "make"
+3.  Type "make grade"
+
+This should give you a score out of 100
+
+
+How to DEBUG if your score is imperfect:
+=========================================
+This testing framework contains two test suites:
+1. A for testing functionality of single instruction
+2. B for testing functionality of multiple instructions
+
+If you get an imperfect score and want to only run one of
+the two suites, you can do so by typing either
+"make gradeA"  or "make gradeB"
+
+Figure out the suite and the test case which failed and 
+check your implementation for those instructions.
+
+The test cases for suite A are in ./test/state_data_in
+
+The test cases for suite B are in ./test/data_in
+
+
+
+ 

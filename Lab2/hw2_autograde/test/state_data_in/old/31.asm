@@ -1,0 +1,3 @@
+.ORIG x1234
+JSRR R7, x5
+.END

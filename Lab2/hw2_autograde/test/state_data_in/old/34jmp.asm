@@ -1,0 +1,14 @@
+.ORIG x1234
+JMP label
+.FILL x0
+.FILL x0
+.FILL x0
+.FILL x0
+.FILL x0
+.FILL x0
+.FILL x0
+.FILL x0
+.FILL x0
+.FILL x0
+label .FILL x0
+.END
