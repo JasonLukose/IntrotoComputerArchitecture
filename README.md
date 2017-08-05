@@ -100,4 +100,51 @@ void cycle_memory() {
 }
 ```
 
-## Lab 2 : Multi Cycle Datapath Simulator
+## Lab 3 : Piplelined Processor
+
+The Lab3 directory contains all the resources for the Piplelined datapath simulator, written in C. The base code contained information regarding the latches, registers and flow of the cycle's stages (such as, MEM_Stage). We were required to simulate what occurs in each stage.
+
+The pipelined processor has 5 stages in this design. To replicate the design of all stages occuring at once, we simply called the stages in backwards order. This meant that for each cycle, the later stages would evaluate and then pass back the control signals to respective earlier stages. 
+
+```C
+void cycle() {
+     NEW_PS = PS;
+     SR_stage();
+     MEM_stage();
+     AGEX_stage();
+     DE_stage();
+     FETCH_stage();
+     PS = NEW_PS;
+     CYCLE_COUNT++;
+   }
+```
+These control signals are necessary to check for data dependencies and control flow dependencies. 
+
+Example code of a dependency check is shown below:
+
+```C
+  /*Depedency Check Logic */
+
+    dep_stall = 0;
+if (PS.DE_V) {
+    /* Data Dependency */
+    if (SR1Need) {
+        if ((v_sr_ld_reg && sr_reg_id == SR1Ind) || (v_mem_ld_reg && PS.MEM_DRID == SR1Ind) || (v_agex_ld_reg && PS.AGEX_DRID == SR1Ind)) {
+            dep_stall = 1;
+        } 
+    }
+     if (SR2Need) {
+        if ((v_sr_ld_reg && sr_reg_id == SR2Ind) || (v_mem_ld_reg && PS.MEM_DRID == SR2Ind) || (v_agex_ld_reg && PS.AGEX_DRID == SR2Ind)) {
+            dep_stall = 1;
+        } 
+    }
+   
+     /* Control Dependency */
+    if (BranchOp) {
+        if (v_agex_ld_cc || v_mem_ld_cc || v_sr_ld_cc) {
+            dep_stall = 1;
+        }
+    }
+}
+```
+Real pipleined processors have more stages and more intricate designs, but understanding this basic design is necessary for all students.
